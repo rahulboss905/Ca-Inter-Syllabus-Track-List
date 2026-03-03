@@ -328,20 +328,20 @@
         .group-2 .group-header { border-left-color: #1f6d4c; }
         body.night-mode .group-2 .group-header { border-left-color: #5fb092; }
 
-        /* Group title – now solid colors for better readability */
+        /* Group title – solid colors */
         .group-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #0f5b7a; /* solid dark blue for Group 1 light mode */
+            color: #0f5b7a;
         }
         .group-2 .group-title {
-            color: #1f6d4c; /* solid dark green for Group 2 light mode */
+            color: #1f6d4c;
         }
         body.night-mode .group-title {
-            color: #a0c0d0; /* light blue for Group 1 night mode */
+            color: #a0c0d0;
         }
         body.night-mode .group-2 .group-title {
-            color: #7fc0a0; /* light green for Group 2 night mode */
+            color: #7fc0a0;
         }
 
         /* Paper header */
@@ -596,10 +596,10 @@
 
 <script>
 (function() {
-    // ----- syllabus data with separated applicability & application chapters -----
+    // ----- syllabus data with updated Paper 6 (FM & SM) -----
     const syllabusData = {
         groups: [
-            // GROUP I
+            // GROUP I (unchanged)
             {
                 name: "GROUP I",
                 class: "group-1",
@@ -610,8 +610,7 @@
                         chapters: [
                             { name: "1. Process of formulation of Accounting Standards including Indian Accounting Standards (IFRS converged standards) and IFRSs; Convergence vs Adoption; Objective and Concepts of carve outs." },
                             { name: "2. Framework for Preparation and Presentation of Financial Statements (as per Accounting Standards)." },
-                            // Split into two separate chapters:
-                            { name: "3. i) Applicability of Accounting Standards to various entities." },  // leaf chapter (single checkbox)
+                            { name: "3. i) Applicability of Accounting Standards to various entities." },
                             {
                                 name: "3. ii) Application of Accounting Standards:",
                                 subChapters: [
@@ -661,7 +660,7 @@
                             { name: "5. Accounting for Branches including foreign branches" }
                         ]
                     },
-                    // PAPER 2: CORPORATE AND OTHER LAWS (unchanged)
+                    // PAPER 2: CORPORATE AND OTHER LAWS
                     {
                         name: "📄 PAPER 2: CORPORATE AND OTHER LAWS (100 MARKS)",
                         chapters: [
@@ -693,7 +692,7 @@
                             }
                         ]
                     },
-                    // PAPER 3: TAXATION (unchanged)
+                    // PAPER 3: TAXATION
                     {
                         name: "📄 PAPER 3: TAXATION (100 MARKS)",
                         chapters: [
@@ -732,7 +731,7 @@
                 name: "GROUP II",
                 class: "group-2",
                 papers: [
-                    // PAPER 4: COST AND MANAGEMENT ACCOUNTING (direct checkboxes under each chapter)
+                    // PAPER 4: COST AND MANAGEMENT ACCOUNTING (unchanged)
                     {
                         name: "📄 PAPER 4: COST AND MANAGEMENT ACCOUNTING (100 MARKS)",
                         chapters: [
@@ -774,7 +773,7 @@
                             }
                         ]
                     },
-                    // PAPER 5: AUDITING AND ETHICS
+                    // PAPER 5: AUDITING AND ETHICS (unchanged)
                     {
                         name: "📄 PAPER 5: AUDITING AND ETHICS (100 MARKS)",
                         chapters: [
@@ -791,21 +790,46 @@
                             { name: "11. Ethics and Terms of Audit Engagements" }
                         ]
                     },
-                    // PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT
+                    // PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT (UPDATED)
                     {
                         name: "📄 PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT (100 MARKS)",
                         chapters: [
                             {
-                                name: "SECTION A: FINANCIAL MANAGEMENT (50 MARKS)",
+                                name: "SECTION A – FINANCIAL MANAGEMENT (50 MARKS)",
                                 subChapters: [
-                                    { name: "1. Financial Management and Financial Analysis" },
-                                    { name: "2. Financing Decisions and Cost of Capital" },
-                                    { name: "3. Capital Investment and Dividend Decisions" },
-                                    { name: "4. Management of Working Capital" }
+                                    {
+                                        name: "1. Financial Management and Financial Analysis",
+                                        subChapters: [
+                                            { name: "Introduction to Financial Management Function" },
+                                            { name: "Financial Analysis through Ratios" }
+                                        ]
+                                    },
+                                    {
+                                        name: "2. Financing Decisions and Cost of Capital",
+                                        subChapters: [
+                                            { name: "Sources of Finance" },
+                                            { name: "Cost of Capital" },
+                                            { name: "Capital Structure Decisions" },
+                                            { name: "Leverages" }
+                                        ]
+                                    },
+                                    {
+                                        name: "3. Capital Investment and Dividend Decisions",
+                                        subChapters: [
+                                            { name: "Capital Investment Decisions" },
+                                            { name: "Dividend Decisions" }
+                                        ]
+                                    },
+                                    {
+                                        name: "4. Management of Working Capital",
+                                        subChapters: [
+                                            { name: "Management of Working Capital" }
+                                        ]
+                                    }
                                 ]
                             },
                             {
-                                name: "SECTION B: STRATEGIC MANAGEMENT (50 MARKS)",
+                                name: "SECTION B – STRATEGIC MANAGEMENT (50 MARKS)",
                                 subChapters: [
                                     { name: "1. Introduction to Strategic Management" },
                                     { name: "2. Strategic Analysis: External Environment" },
@@ -852,25 +876,34 @@
     }
 
     function renderSubchapter(sub, gIdx, pIdx, cIdx, sIdx) {
-        let html = `<div class="subchapter-block" data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
-        html += `<div class="subchapter-header" data-level="subchapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}" data-sub="${sIdx}">`;
-        html += `<span>🔹 ${sub.name}</span>`;
-        html += `<span class="percentage subchapter-pct" id="subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}">0%<span class="progress-circle" id="subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}"></span></span>`;
-        html += `</div>`;
-        html += `<div class="subchapter-topics hidden" id="subTopics-${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
-
-        if (sub.topics && sub.topics.length) {
+        // If sub has its own subChapters, it's a nested structure (like in updated Paper 6)
+        if (sub.subChapters && sub.subChapters.length > 0) {
+            let html = `<div class="subchapter-block" data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
+            html += `<div class="subchapter-header" data-level="subchapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}" data-sub="${sIdx}">`;
+            html += `<span>🔹 ${sub.name}</span>`;
+            html += `<span class="percentage subchapter-pct" id="subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}">0%<span class="progress-circle" id="subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}"></span></span>`;
+            html += `</div>`;
+            html += `<div class="subchapter-topics hidden" id="subTopics-${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
+            // Render its sub-subchapters as a flat list (topics)
             html += `<ul class="topic-list">`;
-            sub.topics.forEach(topic => {
-                html += `<li><label><input type="checkbox" class="topic-check"> 🔹 ${topic}</label></li>`;
+            sub.subChapters.forEach(ss => {
+                html += `<li><label><input type="checkbox" class="topic-check"> 🔹 ${ss.name}</label></li>`;
             });
             html += `</ul>`;
+            html += `</div></div>`;
+            return html;
         } else {
+            // Normal leaf subchapter
+            let html = `<div class="subchapter-block" data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
+            html += `<div class="subchapter-header" data-level="subchapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}" data-sub="${sIdx}">`;
+            html += `<span>🔹 ${sub.name}</span>`;
+            html += `<span class="percentage subchapter-pct" id="subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}">0%<span class="progress-circle" id="subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}"></span></span>`;
+            html += `</div>`;
+            html += `<div class="subchapter-topics hidden" id="subTopics-${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
             html += `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> 🔹 ${sub.name}</label></li></ul>`;
+            html += `</div></div>`;
+            return html;
         }
-
-        html += `</div></div>`;
-        return html;
     }
 
     // render everything
@@ -1010,7 +1043,6 @@
                 const angle = (pct / 100) * 360;
                 groupCircle.style.background = `conic-gradient(#2ecc71 0deg ${angle}deg, #e0e0e0 ${angle}deg 360deg)`;
             }
-            // Removed large group progress bar update
         });
 
         // papers
