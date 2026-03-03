@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>CA Inter · TEAM SECRET tracker</title>
+    <style>
+        /* ===== RESET & MODERN VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e9eff7 0%, #dbe5f0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 30, 60, 0.25), inset 0 1px 2px rgba(255,255,255,0.6);
+            padding: 2rem 2rem;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        /* mobile adjustments */
+        @media (max-width: 640px) {
+            body { padding: 0.75rem; }
+            .main-container { padding: 1.5rem 1rem; border-radius: 32px; }
+        }
+
+        /* ----- TEAM SECRET BANNER ----- */
+        .team-banner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(115deg, #ffffffb0 0%, #f0f7ff 100%);
+            border-radius: 40px;
+            padding: 0.8rem 1.8rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 12px 25px -10px rgba(0,40,70,0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand img {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .brand h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #0f5b7a, #1d4e6e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .telegram-btn {
+            background: linear-gradient(145deg, #2A7EB3, #1f5f8a);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 60px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0,100,150,0.3);
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-decoration: none;
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(145deg, #358ac7, #256fa3);
+            box-shadow: 0 12px 28px rgba(0,120,180,0.4);
+        }
+
+        .telegram-btn img {
+            width: 22px;
+            height: 22px;
+            filter: brightness(0) invert(1);
+        }
+
+        @media (max-width: 600px) {
+            .team-banner { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            .brand h2 { font-size: 1.6rem; }
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem 1rem;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 700;
+            color: #0a2a3b;
+            letter-spacing: -0.02em;
+            border-bottom: 3px solid rgba(23, 78, 115, 0.2);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #1d5b8e, #154b73);
+            color: white;
+            font-size: 1rem;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0,40,70,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .overall-pct-badge {
+            margin-left: auto;
+            background: linear-gradient(145deg, #1d3e5e, #112f47);
+            color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            box-shadow: 0 6px 14px rgba(0,30,50,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .overall-pct-badge .pct-bar {
+            background: rgba(255,255,255,0.2);
+            width: 50px;
+        }
+        .overall-pct-badge .pct-fill { background: #ffd966; }
+
+        /* groups row */
+        .groups-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0 2rem 0;
+        }
+
+        .group-card {
+            flex: 1 1 350px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 1.8rem 1.5rem 2rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 20px 35px -10px rgba(0, 40, 70, 0.2), inset 0 1px 4px white;
+            transition: all 0.25s ease;
+        }
+
+        .group-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 45px -12px rgba(0, 50, 90, 0.3);
+        }
+
+        .group-card.group-1 { border-top: 8px solid #0f5b7a; }
+        .group-card.group-2 { border-top: 8px solid #1f6d4c; }
+
+        /* headers (clickable) */
+        .group-header, .paper-header, .chapter-header, .subchapter-header {
+            display: flex;
+            align-items: center;
+            gap: 8px 12px;
+            cursor: pointer;
+            padding: 0.6rem 0.8rem;
+            border-radius: 30px;
+            transition: background 0.15s, box-shadow 0.15s;
+            flex-wrap: wrap;
+            background: rgba(240, 248, 255, 0.4);
+            border: 1px solid transparent;
+        }
+
+        .group-header:hover, .paper-header:hover, .chapter-header:hover, .subchapter-header:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #bdd3e8;
+            box-shadow: 0 6px 14px rgba(0,40,60,0.1);
+        }
+
+        .group-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #0f5b7a, #124b66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .group-2 .group-title { background: linear-gradient(145deg, #1f6d4c, #15573b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .paper-header {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #173e57;
+            margin-top: 0.6rem;
+            background: rgba(230, 242, 255, 0.5);
+        }
+        .chapter-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2e5570;
+            margin-left: 0.5rem;
+        }
+        .subchapter-header {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #3f6990;
+            margin-left: 2rem;
+            background: rgba(255,255,240,0.3);
+        }
+
+        .percentage {
+            font-size: 0.9rem;
+            background: rgba(210, 230, 250, 0.8);
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            color: #113855;
+            font-weight: 600;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .group-header .percentage {
+            background: rgba(200, 225, 250, 0.9);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .pct-bar {
+            width: 45px;
+            height: 8px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            display: inline-block;
+            margin-left: 2px;
+        }
+        .pct-fill {
+            height: 100%;
+            background: #1f6d9c;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.2s ease;
+        }
+
+        /* hidden sections */
+        .hidden { display: none !important; }
+
+        /* topic list – super clean */
+        .topic-list {
+            list-style: none;
+            margin: 0.5rem 0 0.8rem 2.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .topic-list { margin-left: 1rem; }
+        }
+
+        .topic-list li {
+            margin: 0.4rem 0;
+            line-height: 1.5;
+        }
+        .topic-list li label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            background: rgba(245, 250, 255, 0.5);
+            transition: background 0.1s, transform 0.1s;
+            border: 1px solid transparent;
+        }
+        .topic-list li label:hover {
+            background: #ffffff;
+            border-color: #abc0d0;
+            box-shadow: 0 4px 10px rgba(0,30,50,0.1);
+            transform: scale(1.01);
+        }
+        .topic-list li input[type=checkbox] {
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+            width: 20px;
+            height: 20px;
+            accent-color: #1f6fa5;
+            border-radius: 6px;
+        }
+
+        /* mobile bigger touch targets */
+        @media (max-width: 600px) {
+            .topic-list li label { padding: 0.7rem 0.8rem; }
+            .topic-list li input[type=checkbox] { width: 24px; height: 24px; }
+            .group-header, .paper-header, .chapter-header, .subchapter-header { padding: 0.8rem 0.6rem; }
+        }
+
+        button {
+            background: white;
+            border: 1.5px solid #b6cde0;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #1d4b70;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
+            box-shadow: 0 8px 16px rgba(0,30,50,0.1);
+            backdrop-filter: blur(4px);
+        }
+        button:hover {
+            background: #e3f0fd;
+            border-color: #5f9bc0;
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0,60,100,0.15);
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border-top: 2px dashed rgba(70, 130, 180, 0.3);
+            padding-top: 1.5rem;
+            color: #2b577a;
+            font-weight: 500;
+        }
+        .legend {
+            display: flex;
+            gap: 20px;
+            background: rgba(255,255,255,0.5);
+            padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+        .legend span::before { content: "📊"; margin-right: 6px; }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <!-- ===== TEAM SECRET BANNER ===== -->
+    <div class="team-banner">
+        <div class="brand">
+            <img src="https://i.ibb.co/8g2YxXq6/tmpyb9cwaub.jpg" alt="Team Secret Logo" onerror="this.style.display='none'">
+            <h2>TEAM SECRET</h2>
+        </div>
+        <a class="telegram-btn" href="https://t.me/team_secret01" target="_blank" rel="noopener noreferrer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: brightness(0) invert(1);">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.045l-1.886 8.869c-.14.645-.516.803-1.047.5l-2.896-2.136-1.398 1.344c-.155.155-.284.284-.582.284l.207-2.979 5.428-4.908c.233-.207-.051-.322-.36-.115L7.896 14.08l-2.818-.94c-.613-.191-.624-.613.128-.906l11.01-4.248c.508-.186.952.124.786.859z" fill="currentColor"/>
+            </svg>
+            Join Telegram
+        </a>
+    </div>
+
+    <h1>
+        📌 CA INTERMEDIATE <span>groups 1 & 2</span>
+        <span class="overall-pct-badge" id="overallPercentage">⚫ 0%</span>
+    </h1>
+    <p style="margin-bottom: 1.2rem; color: #2b5a7a; font-weight: 500; text-shadow: 0 1px 2px white;">▼ tap to expand — every line tickable, progress saved</p>
+
+    <!-- groups container (filled by js) -->
+    <div class="groups-row" id="groupsContainer"></div>
+
+    <div style="display: flex; justify-content: flex-end;">
+        <button id="resetBtn">⟲ reset all progress</button>
+    </div>
+    <div class="footer-note">
+        <div class="legend"><span>auto‑saved in browser</span></div>
+        <span style="opacity:0.8;">✨ crafted by TEAM SECRET</span>
+    </div>
+</div>
+
+<script>
+(function() {
+    // ----- syllabus data (same as previous, fully detailed) -----
+    const syllabusData = {
+        groups: [
+            // GROUP I
+            {
+                name: "GROUP I",
+                class: "group-1",
+                papers: [
+                    // PAPER 1: ADVANCED ACCOUNTING
+                    {
+                        name: "PAPER 1: ADVANCED ACCOUNTING (100 MARKS)",
+                        chapters: [
+                            { name: "1. Process of formulation of Accounting Standards including Indian Accounting Standards (IFRS converged standards) and IFRSs; Convergence vs Adoption; Objective and Concepts of carve outs." },
+                            { name: "2. Framework for Preparation and Presentation of Financial Statements (as per Accounting Standards)." },
+                            {
+                                name: "3. i) Applicability of Accounting Standards to various entities. ii) Application of Accounting Standards:",
+                                subChapters: [
+                                    {
+                                        name: "List of Accounting Standards (AS 1 to AS 29)",
+                                        topics: [
+                                            "AS 1 Disclosure of Accounting Policies",
+                                            "AS 2 Valuation of Inventories",
+                                            "AS 3 Cash Flow Statements",
+                                            "AS 4 Contingencies and Events Occurring After the Balance Sheet Date",
+                                            "AS 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
+                                            "AS 7 Construction Contracts",
+                                            "AS 9 Revenue Recognition",
+                                            "AS 10 Property, Plant and Equipment",
+                                            "AS 11 The Effects of Changes in Foreign Exchange Rates",
+                                            "AS 12 Accounting for Government Grants",
+                                            "AS 13 Accounting for Investments",
+                                            "AS 14 Accounting for Amalgamations (excluding inter-company holdings)",
+                                            "AS 15 Employee Benefits",
+                                            "AS 16 Borrowing Costs Leases",
+                                            "AS 17 Segment Reporting",
+                                            "AS 18 Related Party Disclosures",
+                                            "AS 19 Leases",
+                                            "AS 20 Earnings Per Share",
+                                            "AS 21 Consolidated Financial Statements of single subsidiaries (excluding problems involving acquisition of Interest in Subsidiary at Different Dates, Cross holding, Disposal of a Subsidiary and Foreign Subsidiaries)",
+                                            "AS 22 Accounting for Taxes on Income",
+                                            "AS 23 Accounting for Investment in Associates in Consolidated Financial Statements",
+                                            "AS 24 Discontinuing Operations",
+                                            "AS 25 Interim Financial Reporting",
+                                            "AS 26 Intangible Assets",
+                                            "AS 27 Financial Reporting of Interests in Joint Ventures",
+                                            "AS 28 Impairment of Assets",
+                                            "AS 29 Provisions, Contingent Liabilities and Contingent Assets"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                name: "4. Company Accounts",
+                                subChapters: [
+                                    { name: "(i) Schedule III to the Companies Act, 2013 (Division I)" },
+                                    { name: "(ii) Preparation of financial statements – Statement of Profit and Loss, Balance Sheet and Cash Flow Statement" },
+                                    { name: "(iii) Buy back of securities" },
+                                    { name: "(iv) Accounting for reconstruction of companies" }
+                                ]
+                            },
+                            { name: "5. Accounting for Branches including foreign branches" }
+                        ]
+                    },
+                    // PAPER 2: CORPORATE AND OTHER LAWS
+                    {
+                        name: "PAPER 2: CORPORATE AND OTHER LAWS (100 MARKS)",
+                        chapters: [
+                            {
+                                name: "PART I – COMPANY LAW AND LIMITED LIABILITY PARTNERSHIP LAW (70 MARKS)",
+                                subChapters: [
+                                    { name: "The Companies Act, 2013: including important rules and drafting of notices, resolutions etc." },
+                                    { name: "1. Preliminary" },
+                                    { name: "2. Incorporation of Company and Matters Incidental thereto" },
+                                    { name: "3. Prospectus and Allotment of Securities" },
+                                    { name: "4. Share Capital and Debentures" },
+                                    { name: "5. Acceptance of Deposits by Companies" },
+                                    { name: "6. Registration of Charges" },
+                                    { name: "7. Management and Administration" },
+                                    { name: "8. Declaration and Payment of Dividend" },
+                                    { name: "9. Accounts of Companies" },
+                                    { name: "10. Audit and Auditors" },
+                                    { name: "11. Companies Incorporated Outside India" },
+                                    { name: "The Limited Liability Partnership Act, 2008 including important Rules" }
+                                ]
+                            },
+                            {
+                                name: "PART II – OTHER LAWS (30 MARKS)",
+                                subChapters: [
+                                    { name: "1. The General Clauses Act, 1897: Important Definitions, Extent and Applicability, General Rules of Construction, Powers and Functionaries, Provisions as to Orders, Rules, etc. made under Enactments and Miscellaneous provisions." },
+                                    { name: "2. Interpretation of Statutes: Rules of Interpretation of Statutes, Aids to Interpretation, Rules of Interpretation/Construction of Deeds and Documents." },
+                                    { name: "3. The Foreign Exchange Management Act, 1999: Significant definitions and concepts of Current and Capital Account Transactions." }
+                                ]
+                            }
+                        ]
+                    },
+                    // PAPER 3: TAXATION
+                    {
+                        name: "PAPER 3: TAXATION (100 MARKS)",
+                        chapters: [
+                            {
+                                name: "SECTION A: INCOME TAX LAW (50 MARKS)",
+                                subChapters: [
+                                    { name: "1. Basic Concepts: (i) Income-tax law: An introduction (ii) Significant concepts (person, assessee, previous year, assessment year, income, agricultural income) (iii) Basis of Charge (iv) Procedure for computation of total income and tax payable in case of individuals" },
+                                    { name: "2. Residential status and scope of total income: (i) Residential status (ii) Scope of total income" },
+                                    { name: "3. Heads of income and the provisions governing computation of income under different heads: (i) Salaries (ii) Income from house property (iii) Profits and gains of business or profession Capital gains (iv) Income from other sources" },
+                                    { name: "4. Provisions relating to clubbing of income, set-off or carry forward and set-off of losses, deductions from gross total income." },
+                                    { name: "5. Advance Tax, Tax deduction at source and tax collection at source." },
+                                    { name: "6. Provisions for filing return of income and self-assessment." },
+                                    { name: "7. Computation of total income and income-tax payable by an individual under the alternative tax regimes under the Income-tax Act, 1961 to optimise tax liability." }
+                                ]
+                            },
+                            {
+                                name: "SECTION B: GOODS AND SERVICES TAX (GST) (50 MARKS)",
+                                subChapters: [
+                                    { name: "1. GST Laws: An introduction including Constitutional aspects." },
+                                    { name: "2. Levy and collection of CGST and IGST: (i) Application of CGST/IGST law (ii) Concept of supply including composite and mixed supplies (iii) Charge of tax including reverse charge (iv) Exemption from tax (v) Composition levy" },
+                                    { name: "3. Basic concepts of: (i) Classification (ii) Place of supply (iii) Time of supply (iv) Value of supply (v) Input tax credit" },
+                                    { name: "4. Computation of GST liability." },
+                                    { name: "5. Registration." },
+                                    { name: "6. Tax invoice; Credit and Debit Notes; Electronic way bill." },
+                                    { name: "7. Accounts and Records." },
+                                    { name: "8. Returns." },
+                                    { name: "9. Payment of tax." }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            // GROUP II
+            {
+                name: "GROUP II",
+                class: "group-2",
+                papers: [
+                    // PAPER 4: COST AND MANAGEMENT ACCOUNTING
+                    {
+                        name: "PAPER 4: COST AND MANAGEMENT ACCOUNTING (100 MARKS)",
+                        chapters: [
+                            { name: "1. Overview of Cost and Management Accounting: (i) Introduction to Cost and Management Accounting (ii) Elements of Cost and preparation of Cost Sheets" },
+                            { name: "2. Ascertainment of Cost and Cost Accounting System: (i) Material Cost (ii) Employee Cost (iii) Direct Expenses (iv) Overheads (v) Concepts of Activity Based Costing (ABC) (vi) Integration of cost and financial data" },
+                            { name: "3. Methods of Costing: (i) Single Output/ Unit Costing (ii) Job Costing (iii) Batch Costing (iv) Process/ Operation Costing (v) Costing of Service Sectors" },
+                            { name: "4. Cost Control and Analysis: (i) Standard Costing (ii) Marginal Costing (iii) Budget and Budgetary Control" }
+                        ]
+                    },
+                    // PAPER 5: AUDITING AND ETHICS
+                    {
+                        name: "PAPER 5: AUDITING AND ETHICS (100 MARKS)",
+                        chapters: [
+                            { name: "1. Nature, Objective and Scope of Audit" },
+                            { name: "2. Audit Strategy, Audit Planning and Audit Program" },
+                            { name: "3. Risk Assessment and Internal Control" },
+                            { name: "4. Audit Evidence" },
+                            { name: "5. Audit of Items of Financial Statements" },
+                            { name: "6. Audit Documentation" },
+                            { name: "7. Completion and Review" },
+                            { name: "8. Audit Report" },
+                            { name: "9. Special Features of Audit of Different Type of Entities" },
+                            { name: "10. Audit of Banks" },
+                            { name: "11. Ethics and Terms of Audit Engagements" }
+                        ]
+                    },
+                    // PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT
+                    {
+                        name: "PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT (100 MARKS)",
+                        chapters: [
+                            {
+                                name: "SECTION A: FINANCIAL MANAGEMENT (50 MARKS)",
+                                subChapters: [
+                                    { name: "1. Financial Management and Financial Analysis" },
+                                    { name: "2. Financing Decisions and Cost of Capital" },
+                                    { name: "3. Capital Investment and Dividend Decisions" },
+                                    { name: "4. Management of Working Capital" }
+                                ]
+                            },
+                            {
+                                name: "SECTION B: STRATEGIC MANAGEMENT (50 MARKS)",
+                                subChapters: [
+                                    { name: "1. Introduction to Strategic Management" },
+                                    { name: "2. Strategic Analysis: External Environment" },
+                                    { name: "3. Strategic Analysis: Internal Environment" },
+                                    { name: "4. Strategic Choices" },
+                                    { name: "5. Strategy Implementation and Evaluation" }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+
+    // helper to detect leaf chapter (no children)
+    function isLeafChapter(chapter) {
+        return (!chapter.subChapters || chapter.subChapters.length === 0) && (!chapter.topics || chapter.topics.length === 0);
+    }
+
+    function renderExpandableChapter(chapter, gIdx, pIdx, cIdx) {
+        let html = `<div class="chapter-block" data-chapter="${gIdx}-${pIdx}-${cIdx}">`;
+        html += `<div class="chapter-header" data-level="chapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}">`;
+        html += `<span>${chapter.name}</span>`;
+        html += `<span class="percentage chapter-pct" id="chapterPct-${gIdx}-${pIdx}-${cIdx}">0%<span class="pct-bar"><span class="pct-fill" style="width:0%"></span></span></span>`;
+        html += `</div>`;
+        html += `<div class="chapter-content hidden" id="chapterContent-${gIdx}-${pIdx}-${cIdx}">`;
+
+        if (chapter.subChapters && chapter.subChapters.length) {
+            chapter.subChapters.forEach((sub, sIdx) => {
+                html += renderSubchapter(sub, gIdx, pIdx, cIdx, sIdx);
+            });
+        }
+        if (chapter.topics && chapter.topics.length) {
+            html += `<ul class="topic-list">`;
+            chapter.topics.forEach(topic => {
+                html += `<li><label><input type="checkbox" class="topic-check"> ${topic}</label></li>`;
+            });
+            html += `</ul>`;
+        }
+
+        html += `</div></div>`;
+        return html;
+    }
+
+    function renderSubchapter(sub, gIdx, pIdx, cIdx, sIdx) {
+        let html = `<div class="subchapter-block" data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
+        html += `<div class="subchapter-header" data-level="subchapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}" data-sub="${sIdx}">`;
+        html += `<span>${sub.name}</span>`;
+        html += `<span class="percentage subchapter-pct" id="subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}">0%<span class="pct-bar"><span class="pct-fill" style="width:0%"></span></span></span>`;
+        html += `</div>`;
+        html += `<div class="subchapter-topics hidden" id="subTopics-${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
+
+        if (sub.topics && sub.topics.length) {
+            html += `<ul class="topic-list">`;
+            sub.topics.forEach(topic => {
+                html += `<li><label><input type="checkbox" class="topic-check"> ${topic}</label></li>`;
+            });
+            html += `</ul>`;
+        } else {
+            html += `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> ${sub.name}</label></li></ul>`;
+        }
+
+        html += `</div></div>`;
+        return html;
+    }
+
+    // render everything
+    const container = document.getElementById('groupsContainer');
+    let html = '';
+
+    syllabusData.groups.forEach((group, gIdx) => {
+        html += `<div class="group-card ${group.class}" data-group="${gIdx}">`;
+        html += `<div class="group-header" data-level="group" data-group="${gIdx}">`;
+        html += `<span class="group-title">${group.name}</span>`;
+        html += `<span class="percentage group-pct" id="groupPct-${gIdx}">0%<span class="pct-bar"><span class="pct-fill" style="width:0%"></span></span></span>`;
+        html += `</div>`;
+        html += `<div class="group-papers hidden" id="groupPapers-${gIdx}">`;
+
+        group.papers.forEach((paper, pIdx) => {
+            html += `<div class="paper-block" data-paper="${gIdx}-${pIdx}">`;
+            html += `<div class="paper-header" data-level="paper" data-group="${gIdx}" data-paper="${pIdx}">`;
+            html += `<span>${paper.name}</span>`;
+            html += `<span class="percentage paper-pct" id="paperPct-${gIdx}-${pIdx}">0%<span class="pct-bar"><span class="pct-fill" style="width:0%"></span></span></span>`;
+            html += `</div>`;
+            html += `<div class="paper-chapters hidden" id="paperChapters-${gIdx}-${pIdx}">`;
+
+            paper.chapters.forEach((chapter, cIdx) => {
+                if (isLeafChapter(chapter)) {
+                    html += `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> ${chapter.name}</label></li></ul>`;
+                } else {
+                    html += renderExpandableChapter(chapter, gIdx, pIdx, cIdx);
+                }
+            });
+
+            html += `</div></div>`;
+        });
+
+        html += `</div></div>`;
+    });
+
+    container.innerHTML = html;
+
+    // ----- click handlers for drill-down (same as before) -----
+    document.querySelectorAll('.group-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            if (e.target.closest('input, label, .percentage')) return;
+            const groupIdx = this.dataset.group;
+            document.getElementById(`groupPapers-${groupIdx}`).classList.toggle('hidden');
+        });
+    });
+
+    document.querySelectorAll('.paper-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            if (e.target.closest('input, label, .percentage')) return;
+            const g = this.dataset.group, p = this.dataset.paper;
+            document.getElementById(`paperChapters-${g}-${p}`).classList.toggle('hidden');
+        });
+    });
+
+    document.querySelectorAll('.chapter-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            if (e.target.closest('input, label, .percentage')) return;
+            const g = this.dataset.group, p = this.dataset.paper, c = this.dataset.chapter;
+            document.getElementById(`chapterContent-${g}-${p}-${c}`).classList.toggle('hidden');
+        });
+    });
+
+    document.querySelectorAll('.subchapter-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            if (e.target.closest('input, label, .percentage')) return;
+            const g = this.dataset.group, p = this.dataset.paper, c = this.dataset.chapter, s = this.dataset.sub;
+            document.getElementById(`subTopics-${g}-${p}-${c}-${s}`).classList.toggle('hidden');
+        });
+    });
+
+    // ----- localStorage & progress (with bars) -----
+    const STORAGE_PREFIX = 'ca_syllabus_';
+    const checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+    checkboxes.forEach((cb, idx) => cb.dataset.index = idx);
+
+    function loadTicks() {
+        for (let i = 0; i < checkboxes.length; i++) {
+            const key = STORAGE_PREFIX + i;
+            const val = localStorage.getItem(key);
+            if (val !== null) checkboxes[i].checked = (val === 'true');
+        }
+    }
+
+    function saveHandler(e) {
+        const cb = e.target;
+        const idx = cb.dataset.index;
+        if (idx !== undefined) {
+            localStorage.setItem(STORAGE_PREFIX + idx, cb.checked);
+        }
+        updateAllPercentages();
+    }
+    checkboxes.forEach(cb => cb.addEventListener('change', saveHandler));
+
+    function updateAllPercentages() {
+        const totalOverall = checkboxes.length;
+        const checkedOverall = Array.from(checkboxes).filter(cb => cb.checked).length;
+        const overallPct = totalOverall ? Math.round((checkedOverall / totalOverall) * 100) : 0;
+        document.getElementById('overallPercentage').innerHTML = `⚫ ${overallPct}% <span class="pct-bar"><span class="pct-fill" style="width:${overallPct}%"></span></span>`;
+
+        // groups
+        syllabusData.groups.forEach((g, gIdx) => {
+            const groupCheckboxes = Array.from(document.querySelectorAll(`.group-card[data-group="${gIdx}"] .topic-check`));
+            const total = groupCheckboxes.length;
+            const checked = groupCheckboxes.filter(cb => cb.checked).length;
+            const pct = total ? Math.round((checked / total) * 100) : 0;
+            const pctSpan = document.getElementById(`groupPct-${gIdx}`);
+            if (pctSpan) pctSpan.innerHTML = pct + '%<span class="pct-bar"><span class="pct-fill" style="width:' + pct + '%"></span></span>';
+        });
+
+        // papers
+        syllabusData.groups.forEach((g, gIdx) => {
+            g.papers.forEach((p, pIdx) => {
+                const paperCheckboxes = Array.from(document.querySelectorAll(`.paper-block[data-paper="${gIdx}-${pIdx}"] .topic-check`));
+                const total = paperCheckboxes.length;
+                const checked = paperCheckboxes.filter(cb => cb.checked).length;
+                const pct = total ? Math.round((checked / total) * 100) : 0;
+                const pctSpan = document.getElementById(`paperPct-${gIdx}-${pIdx}`);
+                if (pctSpan) pctSpan.innerHTML = pct + '%<span class="pct-bar"><span class="pct-fill" style="width:' + pct + '%"></span></span>';
+            });
+        });
+
+        // chapters (only expandable ones)
+        syllabusData.groups.forEach((g, gIdx) => {
+            g.papers.forEach((p, pIdx) => {
+                p.chapters.forEach((c, cIdx) => {
+                    if (!isLeafChapter(c)) {
+                        const chapterCheckboxes = Array.from(document.querySelectorAll(`.chapter-block[data-chapter="${gIdx}-${pIdx}-${cIdx}"] .topic-check`));
+                        const total = chapterCheckboxes.length;
+                        const checked = chapterCheckboxes.filter(cb => cb.checked).length;
+                        const pct = total ? Math.round((checked / total) * 100) : 0;
+                        const pctSpan = document.getElementById(`chapterPct-${gIdx}-${pIdx}-${cIdx}`);
+                        if (pctSpan) pctSpan.innerHTML = pct + '%<span class="pct-bar"><span class="pct-fill" style="width:' + pct + '%"></span></span>';
+                    }
+                });
+            });
+        });
+
+        // subchapters
+        syllabusData.groups.forEach((g, gIdx) => {
+            g.papers.forEach((p, pIdx) => {
+                p.chapters.forEach((c, cIdx) => {
+                    if (c.subChapters) {
+                        c.subChapters.forEach((s, sIdx) => {
+                            const subCheckboxes = Array.from(document.querySelectorAll(`.subchapter-block[data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}"] .topic-check`));
+                            const total = subCheckboxes.length;
+                            const checked = subCheckboxes.filter(cb => cb.checked).length;
+                            const pct = total ? Math.round((checked / total) * 100) : 0;
+                            const pctSpan = document.getElementById(`subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}`);
+                            if (pctSpan) pctSpan.innerHTML = pct + '%<span class="pct-bar"><span class="pct-fill" style="width:' + pct + '%"></span></span>';
+                        });
+                    }
+                });
+            });
+        });
+    }
+
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith(STORAGE_PREFIX)) localStorage.removeItem(key);
+        }
+        checkboxes.forEach(cb => cb.checked = false);
+        updateAllPercentages();
+    });
+
+    loadTicks();
+    updateAllPercentages();
+})();
+</script>
+</body>
+</html>
