@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <title>CA Inter · TEAM SECRET tracker</title>
     <style>
-        /* ===== RESET & MODERN VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +12,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Light mode (default) */
         body {
             background: linear-gradient(145deg, #e9eff7 0%, #dbe5f0 100%);
             color: #0a2a3b;
@@ -25,7 +23,6 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* Night mode */
         body.night-mode {
             background: linear-gradient(145deg, #1a2634 0%, #0f1a24 100%);
             color: #e0e0e0;
@@ -43,7 +40,7 @@
             padding: 2rem 2rem;
             border: 1px solid rgba(255,255,255,0.7);
             transition: background 0.3s, border-color 0.3s;
-            position: relative; /* for absolute positioning of theme toggle */
+            position: relative;
         }
 
         body.night-mode .main-container {
@@ -52,13 +49,11 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
         }
 
-        /* mobile adjustments */
         @media (max-width: 640px) {
             body { padding: 0.75rem; }
             .main-container { padding: 1.5rem 1rem; border-radius: 32px; }
         }
 
-        /* ----- NIGHT MODE TOGGLE (top right corner) ----- */
         .theme-toggle {
             position: absolute;
             top: 1.2rem;
@@ -89,7 +84,6 @@
             color: #f0f0f0;
         }
 
-        /* ----- TEAM SECRET BANNER ----- */
         .team-banner {
             display: flex;
             flex-wrap: wrap;
@@ -215,13 +209,13 @@
             background: linear-gradient(135deg, #2a5f8a, #1a4a70);
         }
 
-        /* --- STICKY OVERALL PROGRESS BAR --- */
         .sticky-progress {
             position: sticky;
             top: 10px;
             z-index: 100;
             background: rgba(255,255,255,0.9);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             padding: 0.8rem 1.5rem;
             border-radius: 60px;
             display: flex;
@@ -268,7 +262,6 @@
             transition: width 0.3s ease;
         }
 
-        /* groups row */
         .groups-row {
             display: flex;
             flex-wrap: wrap;
@@ -305,8 +298,6 @@
         body.night-mode .group-card.group-1 { border-top-color: #4a9bc0; }
         body.night-mode .group-card.group-2 { border-top-color: #5fb092; }
 
-        /* ===== ENHANCED HIERARCHY ===== */
-        /* Group header */
         .group-header {
             display: flex;
             align-items: center;
@@ -328,7 +319,6 @@
         .group-2 .group-header { border-left-color: #1f6d4c; }
         body.night-mode .group-2 .group-header { border-left-color: #5fb092; }
 
-        /* Group title – solid colors */
         .group-title {
             font-size: 2rem;
             font-weight: 700;
@@ -344,7 +334,6 @@
             color: #7fc0a0;
         }
 
-        /* Paper header */
         .paper-header {
             display: flex;
             align-items: center;
@@ -367,7 +356,6 @@
             color: #c0d0e0;
         }
 
-        /* Chapter header */
         .chapter-header {
             display: flex;
             align-items: center;
@@ -390,7 +378,6 @@
             color: #d0e0f0;
         }
 
-        /* Subchapter header */
         .subchapter-header {
             display: flex;
             align-items: center;
@@ -413,7 +400,6 @@
             color: #d0e0f0;
         }
 
-        /* topic list indentation */
         .topic-list {
             list-style: none;
             margin: 0.5rem 0 0.8rem 4rem;
@@ -459,6 +445,7 @@
             font-weight: 600;
             white-space: nowrap;
             backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             border: 1px solid rgba(255,255,255,0.7);
             margin-left: auto;
             display: inline-flex;
@@ -473,7 +460,6 @@
             border-color: rgba(100,130,160,0.7);
         }
 
-        /* Small circular progress for all levels */
         .progress-circle {
             width: 16px;
             height: 16px;
@@ -482,7 +468,6 @@
             background: conic-gradient(#2ecc71 0deg 0deg, #e0e0e0 0deg 360deg);
         }
 
-        /* hidden sections */
         .hidden { display: none !important; }
 
         button {
@@ -498,6 +483,7 @@
             margin-top: 1rem;
             box-shadow: 0 8px 16px rgba(0,30,50,0.1);
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
         button:hover {
             background: #e3f0fd;
@@ -538,6 +524,7 @@
             padding: 0.4rem 1.5rem;
             border-radius: 60px;
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
         body.night-mode .legend {
@@ -545,14 +532,24 @@
         }
 
         .legend span::before { content: "📊"; margin-right: 6px; }
+
+        /* instruction text - remove shadow in night mode for better clarity */
+        .instruction-text {
+            margin-bottom: 1.2rem;
+            color: #2b5a7a;
+            font-weight: 500;
+            text-shadow: 0 1px 2px white;
+        }
+        body.night-mode .instruction-text {
+            color: #b0c8e0;
+            text-shadow: none;
+        }
     </style>
 </head>
 <body>
 <div class="main-container">
-    <!-- Night mode toggle (top right corner) -->
     <div class="theme-toggle" id="themeToggle" title="Toggle night mode">🌙</div>
 
-    <!-- ===== TEAM SECRET BANNER ===== -->
     <div class="team-banner">
         <div class="brand">
             <img src="https://i.ibb.co/8g2YxXq6/tmpyb9cwaub.jpg" alt="Team Secret Logo" onerror="this.style.display='none'">
@@ -571,7 +568,6 @@
         <span class="overall-pct-badge" id="overallPercentage">⚫ 0%</span>
     </h1>
 
-    <!-- ===== STICKY OVERALL PROGRESS BAR ===== -->
     <div class="sticky-progress">
         <span>Overall progress:</span>
         <div class="progress-bg">
@@ -580,9 +576,8 @@
         <span id="stickyOverallText">0%</span>
     </div>
 
-    <p style="margin-bottom: 1.2rem; color: #2b5a7a; font-weight: 500; text-shadow: 0 1px 2px white;">▼ tap to expand — every line tickable, progress saved</p>
+    <p class="instruction-text">▼ tap to expand — every line tickable, progress saved</p>
 
-    <!-- groups container (filled by js) -->
     <div class="groups-row" id="groupsContainer"></div>
 
     <div style="display: flex; justify-content: flex-end;">
@@ -596,15 +591,13 @@
 
 <script>
 (function() {
-    // ----- syllabus data with updated Paper 6 (FM & SM) -----
+    // ----- syllabus data with detailed taxation topics (all subchapters expanded) -----
     const syllabusData = {
         groups: [
-            // GROUP I (unchanged)
             {
                 name: "GROUP I",
                 class: "group-1",
                 papers: [
-                    // PAPER 1: ADVANCED ACCOUNTING
                     {
                         name: "📄 PAPER 1: ADVANCED ACCOUNTING (100 MARKS)",
                         chapters: [
@@ -617,33 +610,33 @@
                                     {
                                         name: "List of Accounting Standards (AS 1 to AS 29)",
                                         topics: [
-                                            "AS 1 Disclosure of Accounting Policies",
-                                            "AS 2 Valuation of Inventories",
-                                            "AS 3 Cash Flow Statements",
-                                            "AS 4 Contingencies and Events Occurring After the Balance Sheet Date",
-                                            "AS 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
-                                            "AS 7 Construction Contracts",
-                                            "AS 9 Revenue Recognition",
-                                            "AS 10 Property, Plant and Equipment",
-                                            "AS 11 The Effects of Changes in Foreign Exchange Rates",
-                                            "AS 12 Accounting for Government Grants",
-                                            "AS 13 Accounting for Investments",
-                                            "AS 14 Accounting for Amalgamations (excluding inter-company holdings)",
-                                            "AS 15 Employee Benefits",
-                                            "AS 16 Borrowing Costs Leases",
-                                            "AS 17 Segment Reporting",
-                                            "AS 18 Related Party Disclosures",
-                                            "AS 19 Leases",
-                                            "AS 20 Earnings Per Share",
-                                            "AS 21 Consolidated Financial Statements of single subsidiaries (excluding problems involving acquisition of Interest in Subsidiary at Different Dates, Cross holding, Disposal of a Subsidiary and Foreign Subsidiaries)",
-                                            "AS 22 Accounting for Taxes on Income",
-                                            "AS 23 Accounting for Investment in Associates in Consolidated Financial Statements",
-                                            "AS 24 Discontinuing Operations",
-                                            "AS 25 Interim Financial Reporting",
-                                            "AS 26 Intangible Assets",
-                                            "AS 27 Financial Reporting of Interests in Joint Ventures",
-                                            "AS 28 Impairment of Assets",
-                                            "AS 29 Provisions, Contingent Liabilities and Contingent Assets"
+                                            "AS 1 – Disclosure of Accounting Policies",
+                                            "AS 2 – Valuation of Inventories",
+                                            "AS 3 – Cash Flow Statements",
+                                            "AS 4 – Contingencies and Events Occurring After the Balance Sheet Date",
+                                            "AS 5 – Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
+                                            "AS 7 – Construction Contracts",
+                                            "AS 9 – Revenue Recognition",
+                                            "AS 10 – Property, Plant and Equipment",
+                                            "AS 11 – The Effects of Changes in Foreign Exchange Rates",
+                                            "AS 12 – Accounting for Government Grants",
+                                            "AS 13 – Accounting for Investments",
+                                            "AS 14 – Accounting for Amalgamations",
+                                            "AS 15 – Employee Benefits",
+                                            "AS 16 – Borrowing Costs",
+                                            "AS 17 – Segment Reporting",
+                                            "AS 18 – Related Party Disclosures",
+                                            "AS 19 – Leases",
+                                            "AS 20 – Earnings Per Share",
+                                            "AS 21 – Consolidated Financial Statements",
+                                            "AS 22 – Accounting for Taxes on Income",
+                                            "AS 23 – Accounting for Investment in Associates in Consolidated Financial Statements",
+                                            "AS 24 – Discontinuing Operations",
+                                            "AS 25 – Interim Financial Reporting",
+                                            "AS 26 – Intangible Assets",
+                                            "AS 27 – Financial Reporting of Interests in Joint Ventures",
+                                            "AS 28 – Impairment of Assets",
+                                            "AS 29 – Provisions, Contingent Liabilities and Contingent Assets"
                                         ]
                                     }
                                 ]
@@ -660,7 +653,6 @@
                             { name: "5. Accounting for Branches including foreign branches" }
                         ]
                     },
-                    // PAPER 2: CORPORATE AND OTHER LAWS
                     {
                         name: "📄 PAPER 2: CORPORATE AND OTHER LAWS (100 MARKS)",
                         chapters: [
@@ -692,33 +684,130 @@
                             }
                         ]
                     },
-                    // PAPER 3: TAXATION
                     {
                         name: "📄 PAPER 3: TAXATION (100 MARKS)",
                         chapters: [
                             {
                                 name: "SECTION A: INCOME TAX LAW (50 MARKS)",
                                 subChapters: [
-                                    { name: "1. Basic Concepts: (i) Income-tax law: An introduction (ii) Significant concepts (person, assessee, previous year, assessment year, income, agricultural income) (iii) Basis of Charge (iv) Procedure for computation of total income and tax payable in case of individuals" },
-                                    { name: "2. Residential status and scope of total income: (i) Residential status (ii) Scope of total income" },
-                                    { name: "3. Heads of income and the provisions governing computation of income under different heads: (i) Salaries (ii) Income from house property (iii) Profits and gains of business or profession Capital gains (iv) Income from other sources" },
-                                    { name: "4. Provisions relating to clubbing of income, set-off or carry forward and set-off of losses, deductions from gross total income." },
-                                    { name: "5. Advance Tax, Tax deduction at source and tax collection at source." },
-                                    { name: "6. Provisions for filing return of income and self-assessment." },
-                                    { name: "7. Computation of total income and income-tax payable by an individual under the alternative tax regimes under the Income-tax Act, 1961 to optimise tax liability." }
+                                    {
+                                        name: "1. Basic Concepts",
+                                        topics: [
+                                            "(i) Income-tax law: An introduction",
+                                            "(ii) Significant concepts (person, assessee, previous year, assessment year, income, agricultural income)",
+                                            "(iii) Basis of Charge",
+                                            "(iv) Procedure for computation of total income and tax payable in case of individuals"
+                                        ]
+                                    },
+                                    {
+                                        name: "2. Residential status and scope of total income",
+                                        topics: [
+                                            "(i) Residential status",
+                                            "(ii) Scope of total income"
+                                        ]
+                                    },
+                                    {
+                                        name: "3. Heads of income and the provisions governing computation of income under different heads",
+                                        topics: [
+                                            "(i) Salaries",
+                                            "(ii) Income from house property",
+                                            "(iii) Profits and gains of business or profession Capital gains",
+                                            "(iv) Income from other sources"
+                                        ]
+                                    },
+                                    {
+                                        name: "4. Provisions relating to clubbing of income, set-off or carry forward and set-off of losses, deductions from gross total income",
+                                        topics: [
+                                            "Clubbing of income",
+                                            "Set-off or carry forward and set-off of losses",
+                                            "Deductions from gross total income"
+                                        ]
+                                    },
+                                    {
+                                        name: "5. Advance Tax, Tax deduction at source and tax collection at source",
+                                        topics: [
+                                            "Advance Tax",
+                                            "Tax deduction at source",
+                                            "Tax collection at source"
+                                        ]
+                                    },
+                                    {
+                                        name: "6. Provisions for filing return of income and self-assessment",
+                                        topics: [
+                                            "Filing return of income",
+                                            "Self-assessment"
+                                        ]
+                                    },
+                                    {
+                                        name: "7. Computation of total income and income-tax payable by an individual under the alternative tax regimes under the Income-tax Act, 1961 to optimise tax liability",
+                                        topics: [
+                                            "Computation of total income and income-tax payable under alternative tax regimes"
+                                        ]
+                                    }
                                 ]
                             },
                             {
                                 name: "SECTION B: GOODS AND SERVICES TAX (GST) (50 MARKS)",
                                 subChapters: [
-                                    { name: "1. GST Laws: An introduction including Constitutional aspects." },
-                                    { name: "2. Levy and collection of CGST and IGST: (i) Application of CGST/IGST law (ii) Concept of supply including composite and mixed supplies (iii) Charge of tax including reverse charge (iv) Exemption from tax (v) Composition levy" },
-                                    { name: "3. Basic concepts of: (i) Classification (ii) Place of supply (iii) Time of supply (iv) Value of supply (v) Input tax credit" },
-                                    { name: "4. Computation of GST liability." },
-                                    { name: "5. Registration." },
-                                    { name: "6. Tax invoice; Credit and Debit Notes; Electronic way bill." },
-                                    { name: "7. Accounts and Records." },
-                                    { name: "8. Returns." },
+                                    {
+                                        name: "1. GST Laws: An introduction including Constitutional aspects",
+                                        topics: [
+                                            "Introduction to GST",
+                                            "Constitutional aspects"
+                                        ]
+                                    },
+                                    {
+                                        name: "2. Levy and collection of CGST and IGST",
+                                        topics: [
+                                            "(i) Application of CGST/IGST law",
+                                            "(ii) Concept of supply including composite and mixed supplies",
+                                            "(iii) Charge of tax including reverse charge",
+                                            "(iv) Exemption from tax",
+                                            "(v) Composition levy"
+                                        ]
+                                    },
+                                    {
+                                        name: "3. Basic concepts of",
+                                        topics: [
+                                            "(i) Classification",
+                                            "(ii) Place of supply",
+                                            "(iii) Time of supply",
+                                            "(iv) Value of supply",
+                                            "(v) Input tax credit"
+                                        ]
+                                    },
+                                    {
+                                        name: "4. Computation of GST liability",
+                                        topics: [
+                                            "Computation of GST liability"
+                                        ]
+                                    },
+                                    {
+                                        name: "5. Registration",
+                                        topics: [
+                                            "Registration"
+                                        ]
+                                    },
+                                    {
+                                        name: "6. Tax invoice; Credit and Debit Notes; Electronic way bill",
+                                        topics: [
+                                            "Tax invoice",
+                                            "Credit and Debit Notes",
+                                            "Electronic way bill"
+                                        ]
+                                    },
+                                    {
+                                        name: "7. Accounts and Records",
+                                        topics: [
+                                            "Accounts and Records"
+                                        ]
+                                    },
+                                    {
+                                        name: "8. Returns",
+                                        topics: [
+                                            "Returns"
+                                        ]
+                                    },
                                     { name: "9. Payment of tax." }
                                 ]
                             }
@@ -726,12 +815,10 @@
                     }
                 ]
             },
-            // GROUP II
             {
                 name: "GROUP II",
                 class: "group-2",
                 papers: [
-                    // PAPER 4: COST AND MANAGEMENT ACCOUNTING (unchanged)
                     {
                         name: "📄 PAPER 4: COST AND MANAGEMENT ACCOUNTING (100 MARKS)",
                         chapters: [
@@ -773,7 +860,6 @@
                             }
                         ]
                     },
-                    // PAPER 5: AUDITING AND ETHICS (unchanged)
                     {
                         name: "📄 PAPER 5: AUDITING AND ETHICS (100 MARKS)",
                         chapters: [
@@ -790,7 +876,6 @@
                             { name: "11. Ethics and Terms of Audit Engagements" }
                         ]
                     },
-                    // PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT (UPDATED)
                     {
                         name: "📄 PAPER 6: FINANCIAL MANAGEMENT AND STRATEGIC MANAGEMENT (100 MARKS)",
                         chapters: [
@@ -845,9 +930,13 @@
         ]
     };
 
-    // helper to detect leaf chapter (no children)
     function isLeafChapter(chapter) {
         return (!chapter.subChapters || chapter.subChapters.length === 0) && (!chapter.topics || chapter.topics.length === 0);
+    }
+
+    // Render a leaf chapter as a simple list item with checkbox
+    function renderLeafChapter(chapter, gIdx, pIdx, cIdx) {
+        return `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> 🔹 ${chapter.name}</label></li></ul>`;
     }
 
     function renderExpandableChapter(chapter, gIdx, pIdx, cIdx) {
@@ -876,37 +965,33 @@
     }
 
     function renderSubchapter(sub, gIdx, pIdx, cIdx, sIdx) {
-        // If sub has its own subChapters, it's a nested structure (like in updated Paper 6)
-        if (sub.subChapters && sub.subChapters.length > 0) {
+        // If sub has subChapters or topics, it's expandable
+        if ((sub.subChapters && sub.subChapters.length > 0) || (sub.topics && sub.topics.length > 0)) {
             let html = `<div class="subchapter-block" data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
             html += `<div class="subchapter-header" data-level="subchapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}" data-sub="${sIdx}">`;
             html += `<span>🔹 ${sub.name}</span>`;
             html += `<span class="percentage subchapter-pct" id="subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}">0%<span class="progress-circle" id="subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}"></span></span>`;
             html += `</div>`;
             html += `<div class="subchapter-topics hidden" id="subTopics-${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
-            // Render its sub-subchapters as a flat list (topics)
             html += `<ul class="topic-list">`;
-            sub.subChapters.forEach(ss => {
-                html += `<li><label><input type="checkbox" class="topic-check"> 🔹 ${ss.name}</label></li>`;
-            });
+            if (sub.subChapters && sub.subChapters.length > 0) {
+                sub.subChapters.forEach(ss => {
+                    html += `<li><label><input type="checkbox" class="topic-check"> 🔹 ${ss.name}</label></li>`;
+                });
+            } else if (sub.topics && sub.topics.length > 0) {
+                sub.topics.forEach(topic => {
+                    html += `<li><label><input type="checkbox" class="topic-check"> 🔹 ${topic}</label></li>`;
+                });
+            }
             html += `</ul>`;
             html += `</div></div>`;
             return html;
         } else {
-            // Normal leaf subchapter
-            let html = `<div class="subchapter-block" data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
-            html += `<div class="subchapter-header" data-level="subchapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}" data-sub="${sIdx}">`;
-            html += `<span>🔹 ${sub.name}</span>`;
-            html += `<span class="percentage subchapter-pct" id="subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}">0%<span class="progress-circle" id="subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}"></span></span>`;
-            html += `</div>`;
-            html += `<div class="subchapter-topics hidden" id="subTopics-${gIdx}-${pIdx}-${cIdx}-${sIdx}">`;
-            html += `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> 🔹 ${sub.name}</label></li></ul>`;
-            html += `</div></div>`;
-            return html;
+            // Leaf subchapter: just a checkbox (no expandable header)
+            return `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> 🔹 ${sub.name}</label></li></ul>`;
         }
     }
 
-    // render everything
     const container = document.getElementById('groupsContainer');
     let html = '';
 
@@ -916,7 +1001,6 @@
         html += `<span class="group-title">📁 ${group.name}</span>`;
         html += `<span class="percentage group-pct" id="groupPct-${gIdx}">0%<span class="progress-circle" id="groupCircle-${gIdx}"></span></span>`;
         html += `</div>`;
-        // Removed the large group progress bar
         html += `<div class="group-papers hidden" id="groupPapers-${gIdx}">`;
 
         group.papers.forEach((paper, pIdx) => {
@@ -928,7 +1012,7 @@
             html += `<div class="paper-chapters hidden" id="paperChapters-${gIdx}-${pIdx}">`;
 
             paper.chapters.forEach((chapter, cIdx) => {
-                // Special handling for Paper 4 (Cost) – flatten subchapters into direct checkboxes
+                // Special handling for Paper 4 (Cost) – flatten subchapters into direct checkboxes inside a chapter block
                 if (gIdx === 1 && pIdx === 0 && chapter.subChapters && chapter.subChapters.length > 0) {
                     html += `<div class="chapter-block" data-chapter="${gIdx}-${pIdx}-${cIdx}">`;
                     html += `<div class="chapter-header" data-level="chapter" data-group="${gIdx}" data-paper="${pIdx}" data-chapter="${cIdx}">`;
@@ -944,7 +1028,7 @@
                     html += `</div></div>`;
                 }
                 else if (isLeafChapter(chapter)) {
-                    html += `<ul class="topic-list"><li><label><input type="checkbox" class="topic-check"> 🔹 ${chapter.name}</label></li></ul>`;
+                    html += renderLeafChapter(chapter, gIdx, pIdx, cIdx);
                 } else {
                     html += renderExpandableChapter(chapter, gIdx, pIdx, cIdx);
                 }
@@ -991,7 +1075,7 @@
         });
     });
 
-    // ----- localStorage & progress (with bars) -----
+    // ----- localStorage & progress -----
     const STORAGE_PREFIX = 'ca_syllabus_';
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
 
@@ -1020,10 +1104,8 @@
         const checkedOverall = Array.from(checkboxes).filter(cb => cb.checked).length;
         const overallPct = totalOverall ? Math.round((checkedOverall / totalOverall) * 100) : 0;
 
-        // Update sticky overall bar
         document.getElementById('stickyOverallBar').style.width = overallPct + '%';
         document.getElementById('stickyOverallText').innerText = overallPct + '%';
-        // Update the badge
         const badge = document.getElementById('overallPercentage');
         if (badge) badge.innerHTML = `⚫ ${overallPct}%`;
 
@@ -1037,7 +1119,6 @@
             if (pctSpan) {
                 pctSpan.innerHTML = pct + '%<span class="progress-circle" id="groupCircle-'+gIdx+'"></span>';
             }
-            // Update group circle
             const groupCircle = document.getElementById(`groupCircle-${gIdx}`);
             if (groupCircle) {
                 const angle = (pct / 100) * 360;
@@ -1056,7 +1137,6 @@
                 if (pctSpan) {
                     pctSpan.innerHTML = pct + '%<span class="progress-circle" id="paperCircle-'+gIdx+'-'+pIdx+'"></span>';
                 }
-                // Update paper circle
                 const paperCircle = document.getElementById(`paperCircle-${gIdx}-${pIdx}`);
                 if (paperCircle) {
                     const angle = (pct / 100) * 360;
@@ -1065,11 +1145,12 @@
             });
         });
 
-        // chapters (only expandable ones)
+        // chapters (only those with headers – i.e., expandable ones)
         syllabusData.groups.forEach((g, gIdx) => {
             g.papers.forEach((p, pIdx) => {
                 p.chapters.forEach((c, cIdx) => {
-                    if (!isLeafChapter(c) || (gIdx === 1 && pIdx === 0)) { // include cost paper chapters
+                    // Only update if the chapter has an expandable header (i.e., not leaf)
+                    if (!isLeafChapter(c) || (gIdx === 1 && pIdx === 0)) {
                         const chapterCheckboxes = Array.from(document.querySelectorAll(`.chapter-block[data-chapter="${gIdx}-${pIdx}-${cIdx}"] .topic-check`));
                         const total = chapterCheckboxes.length;
                         const checked = chapterCheckboxes.filter(cb => cb.checked).length;
@@ -1078,7 +1159,6 @@
                         if (pctSpan) {
                             pctSpan.innerHTML = pct + '%<span class="progress-circle" id="chapterCircle-'+gIdx+'-'+pIdx+'-'+cIdx+'"></span>';
                         }
-                        // Update chapter circle
                         const chapterCircle = document.getElementById(`chapterCircle-${gIdx}-${pIdx}-${cIdx}`);
                         if (chapterCircle) {
                             const angle = (pct / 100) * 360;
@@ -1089,26 +1169,28 @@
             });
         });
 
-        // subchapters (for papers other than Cost)
+        // subchapters (only those with headers)
         syllabusData.groups.forEach((g, gIdx) => {
             g.papers.forEach((p, pIdx) => {
                 if (gIdx === 1 && pIdx === 0) return; // skip Cost paper – no subchapter blocks
                 p.chapters.forEach((c, cIdx) => {
                     if (c.subChapters) {
                         c.subChapters.forEach((s, sIdx) => {
-                            const subCheckboxes = Array.from(document.querySelectorAll(`.subchapter-block[data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}"] .topic-check`));
-                            const total = subCheckboxes.length;
-                            const checked = subCheckboxes.filter(cb => cb.checked).length;
-                            const pct = total ? Math.round((checked / total) * 100) : 0;
-                            const pctSpan = document.getElementById(`subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}`);
-                            if (pctSpan) {
-                                pctSpan.innerHTML = pct + '%<span class="progress-circle" id="subCircle-'+gIdx+'-'+pIdx+'-'+cIdx+'-'+sIdx+'"></span>';
-                            }
-                            // Update subchapter circle
-                            const subCircle = document.getElementById(`subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}`);
-                            if (subCircle) {
-                                const angle = (pct / 100) * 360;
-                                subCircle.style.background = `conic-gradient(#2ecc71 0deg ${angle}deg, #e0e0e0 ${angle}deg 360deg)`;
+                            // Only update if sub has a header (i.e., it has children)
+                            if ((s.subChapters && s.subChapters.length > 0) || (s.topics && s.topics.length > 0)) {
+                                const subCheckboxes = Array.from(document.querySelectorAll(`.subchapter-block[data-subchapter="${gIdx}-${pIdx}-${cIdx}-${sIdx}"] .topic-check`));
+                                const total = subCheckboxes.length;
+                                const checked = subCheckboxes.filter(cb => cb.checked).length;
+                                const pct = total ? Math.round((checked / total) * 100) : 0;
+                                const pctSpan = document.getElementById(`subPct-${gIdx}-${pIdx}-${cIdx}-${sIdx}`);
+                                if (pctSpan) {
+                                    pctSpan.innerHTML = pct + '%<span class="progress-circle" id="subCircle-'+gIdx+'-'+pIdx+'-'+cIdx+'-'+sIdx+'"></span>';
+                                }
+                                const subCircle = document.getElementById(`subCircle-${gIdx}-${pIdx}-${cIdx}-${sIdx}`);
+                                if (subCircle) {
+                                    const angle = (pct / 100) * 360;
+                                    subCircle.style.background = `conic-gradient(#2ecc71 0deg ${angle}deg, #e0e0e0 ${angle}deg 360deg)`;
+                                }
                             }
                         });
                     }
@@ -1134,7 +1216,6 @@
     const body = document.body;
     const themeKey = 'ca_night_mode';
 
-    // Load saved theme
     if (localStorage.getItem(themeKey) === 'true') {
         body.classList.add('night-mode');
         themeToggle.innerHTML = '☀️';
